@@ -25,7 +25,7 @@ spec:
       - name: {{ template "fullname" . }}-init
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         command:
-          - //usr/share/jenkins/init.sh
+          - /usr/share/jenkins/init.sh
         volumeMounts:
           - name: data
             mountPath: /var/jenkins_home/
