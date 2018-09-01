@@ -15,7 +15,7 @@ questions:
     type: string
     label: Jenkins Image Name
   - variable: image.tag
-    default: "latest"
+    default: "2.138"
     description: "Jenkins image tag"
     type: string
     label: Image Tag
