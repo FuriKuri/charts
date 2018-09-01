@@ -60,6 +60,7 @@ questions:
   options:
     - "ClusterIP"
     - "NodePort"
+    - "LoadBalancer"
   required: true
   label: Jenkins Service Type
   show_subquestion_if: "NodePort"
