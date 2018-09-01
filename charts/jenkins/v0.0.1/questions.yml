@@ -19,6 +19,12 @@ questions:
     description: "Jenkins image tag"
     type: string
     label: Image Tag
+- variable: helloWorld
+  default: "Hello Jenkins"
+  description: "Use your own Hello World text"
+  label: Hello World Text
+  type: string
+  group: "Container customization"
 - variable: persistence.enabled
   default: "false"
   description: "Enable persistent volume for Jenkins Application"
@@ -53,7 +59,7 @@ questions:
     required: true
     label: Hostname
 - variable: service.type
-  default: "NodePort"
+  default: "LoadBalancer"
   description: "Jenkins Service type"
   type: enum
   show_if: "ingress.enabled=false"
