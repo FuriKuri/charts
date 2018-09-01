@@ -12,7 +12,7 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ template "drone.name" . }}
+        app: {{ template "fullname" . }}
         release: "{{ .Release.Name }}"
     spec:
       {{- if .Values.image.pullSecrets }}
