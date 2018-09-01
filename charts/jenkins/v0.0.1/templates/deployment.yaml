@@ -43,9 +43,6 @@ spec:
         volumeMounts:
           - name: data
             mountPath: /var/jenkins_home/
-{{- with .Values.server.extraContainers }}
-{{ tpl . $ | indent 6 }}
-{{- end }}
       volumes:
       - name: data
       {{- if .Values.persistence.enabled }}
@@ -53,7 +50,4 @@ spec:
           claimName: {{ .Values.persistence.existingClaim | default (include "fullname" .) }}
       {{- else }}
         emptyDir: {}
-      {{- end -}}
-{{- with .Values.server.extraVolumes }}
-{{ tpl . $ | indent 6 }}
-{{- end }}
+      {{ end }}
