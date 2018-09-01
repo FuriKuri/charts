@@ -2,6 +2,6 @@ pipeline:
   lint-charts:
     image: guangbo/chart-testing:v1.0.3
     commands:
-      - git remote add rancher-charts https://github.com/rancher/charts
+      - git remote add rancher-charts https://github.com/furikuri/charts
       - git fetch rancher-charts master
       - chart_test.sh --config test/.testenv --no-install

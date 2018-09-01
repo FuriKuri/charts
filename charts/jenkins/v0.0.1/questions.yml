@@ -1,0 +1,75 @@
+categories:
+- CI/CD
+questions:
+- variable: defaultImage
+  default: "true"
+  description: "Use default Docker image"
+  label: Use Default Image
+  type: boolean
+  show_subquestion_if: false
+  group: "Container Images"
+  subquestions:
+  - variable: image.repository
+    default: "furikuri/jenkins-lab"
+    description: "Jenkins image name"
+    type: string
+    label: Jenkins Image Name
+  - variable: image.tag
+    default: "latest"
+    description: "Jenkins image tag"
+    type: string
+    label: Image Tag
+- variable: persistence.enabled
+  default: "false"
+  description: "Enable persistent volume for Jenkins Application"
+  type: boolean
+  required: true
+  label: Jenkins Persistent Volume Enabled
+  show_subquestion_if: true
+  group: "Jenkins Persistent Settings"
+  subquestions:
+  - variable: persistence.size
+    default: "10Gi"
+    description: "Jenkins Persistent Volume Size"
+    type: string
+    label: Jenkins Volume Size
+  - variable: persistence.storageClass
+    default: ""
+    description: "If undefined or null, uses the default StorageClass. Default to null"
+    type: storageclass
+    label: Default StorageClass for Jenkins
+- variable: ingress.enabled
+  default: false
+  description: "Expose app using Layer 7 Load Balancer - ingress"
+  type: boolean
+  label: Expose app using Layer 7 Load Balancer
+  show_subquestion_if: true
+  group: "Services and Load Balancing"
+  subquestions:
+  - variable: ingress.hosts[0]
+    default: "xip.io"
+    description: "Hostname to your Jenkins application"
+    type: hostname
+    required: true
+    label: Hostname
+- variable: service.type
+  default: "NodePort"
+  description: "Jenkins Service type"
+  type: enum
+  show_if: "ingress.enabled=false"
+  options:
+    - "ClusterIP"
+    - "NodePort"
+  required: true
+  label: Jenkins Service Type
+  show_subquestion_if: "NodePort"
+  group: "Services and Load Balancing"
+  subquestions:
+  - variable: service.nodePort
+    default: ""
+    description: "NodePort http port(to set explicitly, choose port between 30000-32767)"
+    type: int
+    min: 30000
+    max: 32767
+    show_if: "ingress.enabled=false&&service.type=NodePort"
+    label: NodePort Http Port
